@@ -29,6 +29,14 @@ for( let i = 0; i < emojis.length; i++ ) {
   document.querySelector(".game").appendChild(box);
 }
 
+let points = 0;
+
+function playSound(audioName) {
+  let audio = new Audio(`./src/sounds/${audioName}.m4a`);
+  audio.volume = 0.2;
+  audio.play();
+}
+
 function handleClick() {
   if (openCards.length < 2) {
     this.classList.add("boxOpen");
@@ -48,10 +56,12 @@ function checkMatch() {
     openCards[0].classList.add("boxMatch");
     openCards[1].classList.add("boxMatch");
     openCards = [];
+    playSound("hit");
   } else {
     openCards[0].classList.remove("boxOpen");
     openCards[1].classList.remove("boxOpen");
     openCards = [];
+    playSound("error");
   }
 
   let winCards = document.querySelectorAll(".boxMatch");
